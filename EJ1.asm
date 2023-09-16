@@ -10,13 +10,14 @@
 		mov ds, ax
 		
 	carga:
-	
 		mov ah, 1			;servicio de lectura de caracter
 		int 21h	
 		cmp al, 0dh			;comparo con enter
 		je finCarga			;para salir de la entrada
 		mov hola[bx],al		;guardo el caracter leido en hola
 		mov holx[bx],al		;guardo el caracter leido en holx
+		cmp al,41h
+		je cambiarLetra
 		cmp al,61h
 		je cambiarLetra
 		inc bx				;me adelanto 1 caracter en hola
@@ -24,7 +25,7 @@
 	jmp carga
 	
 	cambiarLetra:
-		mov holx[bx], 78h
+		add holx[bx], 17h
 		inc bx
 		jmp carga
 		
